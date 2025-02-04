@@ -1,0 +1,6 @@
+scipy
+matplotlib
+plotly
+openpyxl
+streamlit
+tabulate
