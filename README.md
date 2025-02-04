@@ -40,10 +40,10 @@ and storage media*, Scitech Forum, Orlando, January 2024](https://doi.org/10.251
 > * **Share-Alike**: If you publicly use any adapted version of this database, or works produced from an adapted database, you must also offer that adapted database under the ODbL. 
 > * **Keep open**: If you redistribute the database, or an adapted version of it, then you may use technological measures that restrict the work (such as DRM) as long as you also redistribute a version without such measures.
 > 
-> This database was developed in the french national school of civil aviation (ENAC, Toulouse, FRANCE) by the Conceptual Airplane Design and Operations team (CADO).
+> This database was developed by the Conceptual Air Transport Design and Operations team (CADO) at the French National School of Civil Aviation (ENAC, Toulouse, FRANCE).
 
 
 ## Contact
 
-For any request, please contact <yri-amandine.kambiri@enac.fr>
+For any request, please contact <yri-amandine.kambiri@enac.fr>.
 
