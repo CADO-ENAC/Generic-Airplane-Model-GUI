@@ -18,7 +18,7 @@ import warnings
 
 import numpy as np
 from numpy.linalg import solve
-from numpy.linalg.linalg import LinAlgError
+# from numpy.linalg.linalg import LinAlgError
 
 
 
@@ -29,7 +29,7 @@ def great_circle_distance(p1,p2):
     r = 6371000.
     v1 = np.array([np.cos(p1[0])*np.sin(p1[1]), np.cos(p1[0])*np.cos(p1[1]), np.sin(p1[0])])
     v2 = np.array([np.cos(p2[0])*np.sin(p2[1]), np.cos(p2[0])*np.cos(p2[1]), np.sin(p2[0])])
-    s = angle(np.linalg.norm(np.cross(v1,v2)), np.dot(v1,v2), typ=1)   # Get an angle between -pi and pi
+    s = np.angle(np.linalg.norm(np.cross(v1,v2)), np.dot(v1,v2), typ=1)   # Get an angle between -pi and pi
     return r*abs(s)
 
 
