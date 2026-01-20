@@ -1636,8 +1636,8 @@ class GAM(object):
         distance = output_dict[0][0]
 
         this_dict = self.total_fuel(tow, distance, cruise_speed, mtow, total_power, power_system, altitude_data, reserve_data)
-        this_dict["npax"] = npax
-        this_dict["payload"] = payload
+        this_dict["npax"]      = npax
+        this_dict["payload"]   = payload
         this_dict["pk_o_mass"] = npax * distance / owe
         this_dict["pk_o_enrg"] = npax * distance / this_dict["total_enrg"]
 

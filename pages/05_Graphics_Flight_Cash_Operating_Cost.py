@@ -53,11 +53,11 @@ def pritting_fuel():
 
 
     if airplane_type == "Commuter":
-        st.header("Graphic for commuter airplane")
+        st.header("Aircraft Category: Commuter")
         left1, right1 = st.columns(2)
 
         with left1:
-            st.header("Parameters for commuter airplane")
+            # st.header("Parameters for commuter airplane")
 
             left12, right12 = st.columns(2)
 
@@ -108,7 +108,7 @@ def pritting_fuel():
                 e_fuel_price = float(st.text_input("eFuel Energy Price (/MWh)", e_fuel_price1))
 
         with right1:
-            st.header("Domain Visualization")
+            # st.header("Domain Visualization")
             figa, ax = plt.subplots(1, 1, figsize=(8, 8))
 
             colors = ["green", "cyan", "blue", "orange", "brown"]
@@ -547,7 +547,7 @@ def main_graph():
         layout="wide",
     )
     # App title
-    st.title("Visualization of Best Domains")
+    st.title("Flight Cash Operating Cost Analysis Tool")
     pritting_fuel()
 
 

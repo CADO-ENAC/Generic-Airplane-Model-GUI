@@ -16,6 +16,11 @@ def graphic():
         for element2 in data2:
             graph_list.append(element2[0])
             name_list.append(element2[3])
+    if st.session_state.VARG3:
+        data3 = st.session_state.VARG3
+        for element3 in data3:
+            graph_list.append(element3[0])
+            name_list.append(element3[3])
     if graph_list != [] and name_list != []:
         gam.payload_range_graph(graph_list, name_list)
     else:
@@ -30,8 +35,10 @@ def main():
         layout="centered",
     )
     # App title
-    st.title("Graph of payload in function of range")
-    st.write("Every graph made before with the different method are presented here.")
+    st.title("Payload–Range Analysis Tool")
+    st.markdown("<h3><em>Developed by the CADO Team at ENAC</em></h3>", unsafe_allow_html=True)
+    st.markdown("<h5 style='font-family: Courier New; color: green;'>An interactive tool for visualizing and exploring existing airplane data from a reference database.</h5>", unsafe_allow_html=True)
+
     graphic()
 
 
