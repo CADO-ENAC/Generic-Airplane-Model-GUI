@@ -6,17 +6,17 @@ def graphic():
     gam = GAM()
     graph_list = []
     name_list = []
-    if st.session_state.VARG1:
+    if 'VARG1' in st.session_state:
         data1 = st.session_state.VARG1
         for element1 in data1:
             graph_list.append(element1[0])
             name_list.append(element1[3])
-    if st.session_state.VARG2:
+    if 'VARG2' in st.session_state:
         data2 = st.session_state.VARG2
         for element2 in data2:
             graph_list.append(element2[0])
             name_list.append(element2[3])
-    if st.session_state.VARG3:
+    if 'VARG3' in st.session_state:
         data3 = st.session_state.VARG3
         for element3 in data3:
             graph_list.append(element3[0])
