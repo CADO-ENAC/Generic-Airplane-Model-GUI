@@ -344,8 +344,10 @@ def tweak_graphic():
                         "Property": "Mass Efficiency Factor (P.K/M)",
                         "Value": "%.2f pax.km/kg" % unit.convert_to("km/kg", tweak_dict["pk_o_mass"])
                     })
+                
+                table = pd.DataFrame(table_rows)
+                if Name or propulsion or mission or breakdown or output or factor:
                     st.write("")
-                    table = pd.DataFrame(table_rows)
                     st.dataframe(table, width=600, column_config={"Property": {"width": 300}, "Value": {"width": 300},}, hide_index=True)
 
             else:
@@ -354,10 +356,15 @@ def tweak_graphic():
             st.write("")
             st.write("Compute and Display the Payload-Range Diagram")
             if tweak_dict != {}:
-                two_dict2 = gam.build_payload_range(tweak_dict)    # Compute payload-range data and add them in ac_dict
+                try:
+                    two_dict2 = gam.build_payload_range(tweak_dict)    # Compute payload-range data and add them in ac_dict
+                except:
+                    st.info("Failed to build payload-range diagram.")
                 left_column4 , right_column4 = st.columns(2)
 
                 if 'payload_info' not in st.session_state:
+                    st.session_state.payload_info = False
+                elif st.session_state.payload_info == True:
                     st.session_state.payload_info = False
 
                 with left_column4:
@@ -366,19 +373,20 @@ def tweak_graphic():
                 with right_column4:
                     if st.button("Hide payload-range information"):
                         st.session_state.payload_info = False
-
-                if st.session_state.payload_info :
-                    gam.print_payload_range(tweak_dict)    # Print payload-range data
-                    tup = (tweak_dict, two_dict2, table, '')
-                    st.session_state.VARG3.append(tup)
-                    config_list = []
-                    name_list = []
-                    if st.session_state.VARG3:
-                        print("Configurations found:")
-                        config_list.append(st.session_state.VARG3[0][0])
-                        name_list.append(st.session_state.VARG3[0][3])
-                        gam.payload_range_graph(config_list, name_list)   # Plot payload-range diagram
-                else:
+                try:
+                    if st.session_state.payload_info:
+                        gam.print_payload_range(tweak_dict)    # Print payload-range data
+                        tup = (tweak_dict, two_dict2, table, ' ')
+                        st.session_state.VARG3.append(tup)
+                        config_list = []
+                        name_list = []
+                        if st.session_state.VARG3:
+                            print("Configurations found:")
+                            config_list.append(st.session_state.VARG3[0][0])
+                            name_list.append(st.session_state.VARG3[0][3])
+                            gam.payload_range_graph(config_list, name_list)   # Plot payload-range diagram
+                        st.session_state.VARG3.pop()
+                except:
                     st.info("No configurations to display.")
 
                 st.write("")
@@ -403,8 +411,8 @@ def tweak_graphic():
                                 st.success(f"AC {len(st.session_state.VARG3)} saved!")
 
 
-            else:
-                st.warning("The data can't be computed.")
+            # else:
+            #     st.warning("The data can't be computed.")
 
 
 

@@ -1821,12 +1821,13 @@ class GAM(object):
         window_title = "Payload - Range"
         fig, ax = plt.subplots(figsize=(8, 5))
         fig.canvas.manager.set_window_title(window_title)
-        fig.suptitle(plot_title, fontsize=16)
+        # fig.suptitle(plot_title, fontsize=16)
 
-
+        colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
         for i in range(len(graph_list)):
             ac_dict = graph_list[i]
-            color = graph_list[i].get("color", None)
+            color = colors[i]
+            # color = graph_list[i].get("color", None)
             label = graph_list[i].get("label", None)
 
             if mode == "pax":
@@ -1859,8 +1860,8 @@ class GAM(object):
                 ax.plot(range_vals, payload, linewidth=2, label=acname[i], color=color)
             else:
                 ax.plot(range_vals, payload, linewidth=2, label=acname[i])
-            ax.scatter(range_vals[1:], payload[1:], marker="+", c="orange", s=100)
-            ax.scatter(nominal[1], nominal[0], marker="o", c="green", s=50)
+            ax.scatter(range_vals[1:], payload[1:], marker="+", c="darkorange", s=100)
+            ax.scatter(nominal[1], nominal[0], marker="o", c="y", s=50)
 
         ax.set_ylabel('Payload (kg)' if mode == "kg" else 'Payload (pax)', fontsize=14)
         ax.set_xlabel('Range (km)', fontsize=14)

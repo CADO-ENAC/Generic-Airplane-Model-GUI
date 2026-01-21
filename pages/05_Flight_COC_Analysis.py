@@ -139,7 +139,8 @@ def pritting_fuel():
             # st.header("Domain Visualization")
             figa, ax = plt.subplots(1, 1, figsize=(8, 8))
 
-            colors = ["green", "cyan", "blue", "orange", "brown"]
+            # colors = ["green", "cyan", "blue", "orange", "brown"]
+            colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
 
@@ -266,7 +267,8 @@ def pritting_fuel():
             # st.header("Domain Visualization")
             figa, ax = plt.subplots(1, 1, figsize=(8, 8))
 
-            colors = ["green", "cyan", "blue", "orange", "brown"]
+            # colors = ["green", "cyan", "blue", "orange", "brown"]
+            colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
             gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
@@ -386,7 +388,8 @@ def pritting_fuel():
             # st.header("Domain Visualization")
             figa, ax = plt.subplots(1, 1, figsize=(8, 8))
 
-            colors = ["green", "cyan", "blue", "orange", "brown"]
+            # colors = ["green", "cyan", "blue", "orange", "brown"]
+            colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
             gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
@@ -505,7 +508,8 @@ def pritting_fuel():
             # st.header("Domain Visualization")
             figa, ax = plt.subplots(1, 1, figsize=(8, 8))
 
-            colors = ["green", "cyan", "blue", "orange", "brown"]
+            # colors = ["green", "cyan", "blue", "orange", "brown"]
+            colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
             gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
@@ -625,7 +629,8 @@ def pritting_fuel():
             # st.header("Domain Visualization")
             figa, ax = plt.subplots(2, 2, figsize=(8, 8))
 
-            colors = ["green", "cyan", "blue", "orange", "brown"]
+            # colors = ["green", "cyan", "blue", "orange", "brown"]
+            colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
             gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(

@@ -35,7 +35,7 @@ show = ["", "Airplane type", "Airplane name", "Manufacturer", "ICAO code", "IATA
 errors = ["string", "None", "int", "m", "deg", "m2", "kg",
           "no dim", "kW", "N", "km/h", "ft", "km", "mach"]
 
-colors = {"general": "#008000", "commuter": "#FF00DD", "regional": "#00FFDD", "short_medium": "#9400D3", "long_range": "#FF0000", "business": "#0000FF"}
+colors = {"general": "#d2b48c", "commuter": "#8a9a5b", "regional": "#5f9ea0", "short_medium Range": "#556b2f", "long_range": "#3a5f0b", "business": "#4b5320"}
 
 
 # Parameters selection
@@ -90,8 +90,8 @@ try:
                 data1.append(ele1)
                 data2.append(ele2)
 
-                colors_list.append(colors.get(airplane_type, "#808080"))
-                airplane_types_list.append(airplane_type if pd.notna(airplane_type) else "unknown")
+                colors_list.append(colors.get(airplane_type, "#654321"))
+                airplane_types_list.append(airplane_type if pd.notna(airplane_type) else "Unknown")
         
         # Use a 'Type' column so Plotly shows a legend for aircraft types
         data_frame = pd.DataFrame({
@@ -104,6 +104,7 @@ try:
             data_frame,
             x=para2,
             y=para1,
+            # marker_size=10,
             color="Type",
             color_discrete_map=colors,
             title=f"{para1} as a function of {para2}",
@@ -113,10 +114,11 @@ try:
         
         # Customize legend title / layout
         fig.update_layout(legend_title_text="Airplane Category")
+        fig.update_traces(marker_size=10)
         
         # Add the AC you made at the graphic with the airplane data base data
 
-        st.header("Select Airplane to Add to the Plot")
+        # st.header("Select Airplane to Add to the Plot")
         
         graph_list = []
         if 'VARG1' in st.session_state:
@@ -199,3 +201,4 @@ try:
 
 except:
     st.warning("Two parameters must be selected to generate the plot.")
+

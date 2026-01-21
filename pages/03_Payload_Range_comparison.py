@@ -37,7 +37,7 @@ def main():
     # App title
     st.title("Payload–Range Analysis Tool")
     st.markdown("<h3><em>Developed by the CADO Team at ENAC</em></h3>", unsafe_allow_html=True)
-    st.markdown("<h5 style='font-family: Courier New; color: green;'>An interactive tool for visualizing and exploring existing airplane data from a reference database.</h5>", unsafe_allow_html=True)
+    st.markdown("<h5 style='font-family: Courier New; color: green;'>An interactive tool for comparing payload–range diagrams of previously designed airplanes.</h5>", unsafe_allow_html=True)
 
     graphic()
 

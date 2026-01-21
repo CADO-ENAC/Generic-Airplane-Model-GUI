@@ -241,12 +241,7 @@ def setup2():
             this_dict = gam.design_airplane(power_system_gam, design_mission_gam)
             st.write("Select the Airplane Properties to Display:")
 
-            # Name = st.checkbox("Airplane Name")
-            # if Name:
-            #     table_rows.append({
-            #             "Property" : "Name",
-            #             "Value" : "Generic Airplane"
-            #         })
+
             propulsion = st.checkbox("Propulsion System Definition")
             if propulsion:
                 table_rows.append({
@@ -453,16 +448,23 @@ def setup2():
                     "Value": "%.2f pax.km/kg" % unit.convert_to("km/kg", this_dict["pk_o_mass"])
                 })
             
-            st.write("")
             table = pd.DataFrame(table_rows)
-            st.dataframe(table, width=600, column_config={"Property": {"width": 300}, "Value": {"width": 300},}, hide_index=True)
+            if propulsion or mission or breakdown or output or factor:
+                st.write("")
+                st.dataframe(table, width=600, column_config={"Property": {"width": 300}, "Value": {"width": 300},}, hide_index=True)
 
             st.write("")
             st.write("Compute and Display the Payload-Range Diagram")
-            two_dict = gam.build_payload_range(this_dict)    # Compute payload-range data and add them in ac_dict
+            
+            try:
+                two_dict = gam.build_payload_range(this_dict)    # Compute payload-range data and add them in ac_dict
+            except:
+                st.info("Failed to build payload-range diagram.")
             left_column4 , right_column4 = st.columns(2)
 
             if 'payload_info' not in st.session_state:
+                st.session_state.payload_info = False
+            elif st.session_state.payload_info == True:
                 st.session_state.payload_info = False
 
             with left_column4:
@@ -472,10 +474,9 @@ def setup2():
                 if st.button("Hide Payload-Range Diagram"):
                     st.session_state.payload_info = False
             try:
-                if st.session_state.payload_info :
+                if st.session_state.payload_info:
                     gam.print_payload_range(this_dict)    # Print payload-range data
-                    # gam.payload_range_graph([''], [''])   # Plot payload-range diagram
-                    tup = (this_dict, two_dict, table, '')
+                    tup = (this_dict, two_dict, table, ' ')
                     st.session_state.VARG1.append(tup)
                     config_list = []
                     name_list = []

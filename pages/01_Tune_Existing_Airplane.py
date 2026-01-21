@@ -89,7 +89,7 @@ def setup3():
                             ]
                             
                             if not airplane_info.empty:
-                                st.success(f"Airplane details for ICAO code '{icao_code}' and manufacturer '{constructor1}':")
+                                # st.success(f"Airplane details for ICAO code '{icao_code}' and manufacturer '{constructor1}':")
                                 combined_data = pd.DataFrame({"Property": prop})
 
                                 for idx, (_, row) in enumerate(airplane_info.iterrows(), start=1):
@@ -148,7 +148,7 @@ def setup3():
                         ]
 
                         if not airplane_info.empty:
-                            st.success(f"Airplane details for ICAO code '{icao_code}' and type '{selected_type1}':")
+                            # st.success(f"Airplane details for ICAO code '{icao_code}' and type '{selected_type1}':")
                             combined_data = pd.DataFrame({"Property": prop})
 
                             for idx, (_, row) in enumerate(airplane_info.iterrows(), start=1):
@@ -181,7 +181,7 @@ def setup3():
                     airplane_info = data_airplanes[data_airplanes["iata_code"] == iata_code]
 
                     if not airplane_info.empty:
-                        st.success(f"Airplane details for ICAO code '{icao_code_txt}':")
+                        # st.success(f"Airplane details for ICAO code '{icao_code_txt}':")
                         combined_data = pd.DataFrame({"Property": prop})
 
                         for idx, (_, row) in enumerate(airplane_info.iterrows(), start=1):
@@ -208,7 +208,7 @@ def setup3():
             if data_airplanes[data_airplanes["name"] == airplane].empty and airplane != " ":
                 st.warning(f"No airplane found with the specified name '{airplane}'.")
             if not data_airplanes[data_airplanes["name"] == airplane].empty and airplane != " ":
-                st.success(f"Airplane found: {airplane}")
+                # st.success(f"Airplane found: {airplane}")
                 # Data of the plane the user search
                 final_data = data_airplanes[data_airplanes["name"] == airplane]
     
@@ -241,18 +241,20 @@ def setup3():
                 errors = ["string", "mach", "None", "unknown", "int", "m", "deg", "m2", "kg", "no_dim", "kW", "N", "km/h", "ft", "km"]
                 power_data = ["", "", "", "", ""]
 
-                energy_type = ["", "petrol", "kerosene", "gasoline", "compressed_h2", "liquid_h2", "liquid_ch4", "liquid_nh3", "battery"]
-                energy = st.selectbox("Select Energy Type", energy_type)
+                energy_type = ["", "petrol", "kerosene", "gasoline", "compressed_h2", "liquid_h2", "liquid_ch4", "liquid_nh3", "battery"]                
+                
+                
+                energy = st.selectbox("Select Energy Type", energy_type, index=energy_type.index(final['1'][final.index[final["Property"]=="energy_type"].tolist()[0]]))
                 power_data[0] = energy
 
                 engine_count =  ["", 1, 2, 4]
-                nbengine = st.selectbox("Select Number of Engines", engine_count)
+                nbengine = st.selectbox("Select Number of Engines", engine_count, index=engine_count.index(final['1'][final.index[final["Property"]=="n_engine"].tolist()[0]]))
                 if nbengine != "":
                     if int(nbengine) <= 12 and is_integer(int(nbengine)):
                         power_data[1] = int(nbengine)
 
                 engine_type = ["", "turbofan", "turboprop", "piston", "emotor"]
-                etype = st.selectbox("Select Engine Type", engine_type)
+                etype = st.selectbox("Select Engine Type", engine_type, index=engine_type.index(final['1'][final.index[final["Property"]=="engine_type"].tolist()[0]]))
                 power_data[2] = etype
 
                 if power_data[2] == "turbofan":
@@ -265,7 +267,7 @@ def setup3():
                 if power_data[2] == "turbofan":
                     left_column_bypass, right_column_bypass = st.columns(2)
                     with left_column_bypass:
-                        bpr = st.slider("Engine Bypass Ratio", 5, 15, 10, 1)
+                        bpr = st.slider("Engine Bypass Ratio", 5., 15., float(final['1'][final.index[final["Property"]=="bpr"].tolist()[0]]), 0.1)
                         bpr1 = bpr
 
                     with right_column_bypass:
@@ -297,80 +299,89 @@ def setup3():
                     test_cat = final_data[final_data["airplane_type"] == elec]
                     if not test_cat.empty:
                         design_mission["category"] = elec
-
-
+                
                 # Complete npax
-                pax = st.text_input("Specify Number of Passengers")
+                pax = st.text_input("Specify Number of Passengers", value = final['1'][final.index[final["Property"]=="n_pax"].tolist()[0]])
                 if pax != "":
                     if is_integer(int(pax)) == False:
                         st.warning("Number of passengers must be specified to continue")
                     else:
                         design_mission["npax"] = int(pax)
-
+                
                 # Complete speed
                 st.write("Specify either cruise speed in km/h or Mach number (one option only).")
                 left_column_speed, right_column_speed = st.columns(2)
 
+                
                 with left_column_speed:
-                    cruise_speed = st.text_input("Specify Cruise Speed (km/h)")
-
+                    if float(final['1'][final.index[final["Property"]=="cruise_speed"].tolist()[0]]) > 1.0:
+                        cruise_speed = st.text_input("Specify Cruise Speed (km/h)", value = final['1'][final.index[final["Property"]=="cruise_speed"].tolist()[0]])
+                    else: 
+                        cruise_speed = st.text_input("Specify Cruise Speed (km/h)")
+                
+                
                 with right_column_speed:
-                    cruise_speed = st.text_input("Specify Cruise Mach Number (0.5–0.9)")
-                    
-                if cruise_speed != "":
-                    if is_float(float(cruise_speed)) and float(cruise_speed) > 1:
-                        design_mission["speed"] = unit.convert_from("km/h", int(cruise_speed))
-                    elif is_float(float(cruise_speed)) and float(cruise_speed) < 1:
-                        design_mission["speed"] = float(cruise_speed)
+                    if float(final['1'][final.index[final["Property"]=="cruise_speed"].tolist()[0]]) > 1.0:
+                        cruise_speed_mach = st.text_input("Specify Cruise Mach Number (0.5–0.9)")
                     else:
-                        st.warning("Cruise speed must be specified to continue.")
-
+                        cruise_speed_mach = st.text_input("Specify Cruise Mach Number (0.5–0.9)", value = final['1'][final.index[final["Property"]=="cruise_speed"].tolist()[0]])
+                
+                if cruise_speed != "":
+                    if is_float(float(cruise_speed)) and (float(cruise_speed) > 1.):
+                        print("cruise speed", cruise_speed)
+                        design_mission["speed"] = unit.convert_from("km/h", float(cruise_speed))
+                elif cruise_speed_mach != "":
+                    if is_float(float(cruise_speed_mach)) and (float(cruise_speed_mach) < 1.):
+                        print("cruise speed mach", cruise_speed_mach)
+                        design_mission["speed"] = float(cruise_speed_mach)
+                else:
+                    st.warning("Cruise speed must be specified to continue.")
+                
+                print(design_mission)
                 # Complete range
-                dis = {"general": 500, "commuter": 1500, "regional": 4500,
-                    "short_medium": 8000, "long_range": 15000, "business": 15000}
+                dis = {"general": 500., "commuter": 1500., "regioal": 4500.,
+                    "short_medium": 8000., "long_range": 15000., "business": 15000.}
+            
                 
                 left_column_range, right_column_range = st.columns(2)
                 
-                for key in dis:
-                    test = final_data[final_data["airplane_type"] == key]
-                    if not test.empty:
-                        if dis[key] - 1500 >= 0:
-                            with left_column_range:
-                                range_slider = st.slider("Specify Design Range (km):", dis[key] - 1500, dis[key] + 1500, dis[key], 10)
-                            with right_column_range:
-                                range_slider = int(st.text_input("Specify Exact Design Range (km) ", range_slider))
-                            # st.write(f"### Selected Design Range: {range_slider} km")
-                        else:
-                            with left_column_range:
-                                range_slider = st.slider("Specify Design Range (km):", 0, dis[key] + 1500, dis[key], 10)
-                            with right_column_range:
-                                range_slider = int(st.text_input("Specify Exact Design Range (km) ", range_slider))
-                            # st.write(f"### Selected Design Range: {range_slider} km")
-
+                if len(final_data["airplane_type"].values) != 0 and len(final_data["nominal_range"].values) != 0: 
+                    with left_column_range:
+                        ref_range = float(final['1'][final.index[final["Property"]=="nominal_range"].tolist()[0]])
+                        range_slider = st.slider("Specify Design Range (km):", ref_range - 1500., ref_range + 1500., ref_range, 10.)
+                    with right_column_range:
+                        range_slider = float(st.text_input("Specify Exact Design Range (km) ", range_slider))
+                else:
+                    ref_range = float(dis[final_data["airplane_type"].values[0]])
+                    with left_column_range:
+                        range_slider = st.slider("Specify Design Range (km):", 0., ref_range + 1500., ref_range, 10.)
+                    with right_column_range:
+                        range_slider = float(st.text_input("Specify Exact Design Range (km) ", range_slider))
+                
                 design_mission["range"] = unit.convert_from("km", range_slider)
-
+                
                 # Complete altitude
-                cruise_altitude = st.text_input("Specify Cruise Altitude (ft)")
+                cruise_altitude = st.text_input("Specify Cruise Altitude (ft)", value = final['1'][final.index[final["Property"]=="cruise_altitude"].tolist()[0]])
                 if cruise_altitude != "":
                     if is_integer(int(cruise_altitude)) == False:
                         st.warning("Cruise altitude must be specified to continue.")
                     else:
                         design_mission["altitude"] = int(cruise_altitude)*0.3048
-
+                
                 # Complete MTOW
                 for e in data_airplanes["mtow"]:
                     if e not in errors:
                         test_mtow = final_data[final_data["mtow"] == e]
                         if not test_mtow.empty:
                             design_mission["mtow"] = e
-
+                
                 # Complete OWE
                 for e in data_airplanes["owe"]:
                     if e not in errors:
                         test_owe = final_data[final_data["owe"] == e]
                         if not test_owe.empty:
                             design_mission["owe"] = e
-
+                
                 # Complete payload
                 for key in dis:
                     test = final_data[final_data["airplane_type"] == key]
@@ -379,13 +390,13 @@ def setup3():
                             payload = design_mission["npax"]*gam.mpax_dict[key]
                             design_mission["payload"] = payload
 
-
+                
                 # Complete max_payload
                 if design_mission["payload"] != "":
                     max_payload = design_mission["payload"]*gam.max_payload_factor
                     design_mission["payload_max"] = float(max_payload)
 
-
+                
                 st.write("")
                 c = 0
                 this_dict = {}
@@ -395,11 +406,10 @@ def setup3():
                 try:
                     if c == 9:
                         table_rows = []
-                        
                         this_dict = gam.tune_design(power_system, design_mission)
                         st.write("Select the Airplane Properties to Display:")
 
-                        Name = st.checkbox("Name")
+                        Name = st.checkbox("Airplane Name")
                         if Name:
                             table_rows.append({
                                     "Property" : "Name",
@@ -611,9 +621,11 @@ def setup3():
                                 "Value": "%.2f pax.km/kg" % unit.convert_to("km/kg", this_dict["pk_o_mass"])
                             })
 
-                        st.write("")
+                        
                         table = pd.DataFrame(table_rows)
-                        st.dataframe(table, width=600, column_config={"Property": {"width": 300}, "Value": {"width": 300},}, hide_index=True)
+                        if Name or propulsion or mission or breakdown or output or factor:
+                            st.write("")
+                            st.dataframe(table, width=600, column_config={"Property": {"width": 300}, "Value": {"width": 300},}, hide_index=True)
                 except:
                     st.warning("All design mission parameters must be specified to continue.")
 
@@ -621,38 +633,43 @@ def setup3():
                 st.write("")
                 st.write("#### Compute and Display the Payload-Range Diagram")
                 
-                
                 if this_dict != {}:
-                    two_dict = gam.build_payload_range(this_dict)    # Compute payload-range data and add them in ac_dict
+                    try:
+                        two_dict = gam.build_payload_range(this_dict)    # Compute payload-range data and add them in ac_dict
+                    except:
+                        st.info("Failed to build payload-range diagram.")
                     left_column4 , right_column4 = st.columns(2)
-
-                    print(st.session_state.payload_info)
-                    if 'payload_info' not in st.session_state or st.session_state.payload_info == True:
+                    
+                    if 'payload_info' not in st.session_state:
                         st.session_state.payload_info = False
-
+                    elif st.session_state.payload_info == True:
+                        st.session_state.payload_info = False
+                    
                     with left_column4:
                         if st.button("Show Payload-Range Diagram"):
                             st.session_state.payload_info = True
                     with right_column4:
                         if st.button("Hide Payload-Range Diagram"):
                             st.session_state.payload_info = False
+
+                    
                     try:
-                        if st.session_state.payload_info == True:
+                        if st.session_state.payload_info:
                             gam.print_payload_range(this_dict)    # Print payload-range data
-                            # gam.payload_range_graph([''], [''])   # Plot payload-range diagram
-                            tup = (this_dict, two_dict, table, '')
+                            tup = (this_dict, two_dict, table, ' ')
                             st.session_state.VARG2.append(tup)
                             config_list = []
                             name_list = []
                             if st.session_state.VARG2:
                                 print("Configurations found:")
-                                config_list.append(st.session_state.VARG2[1][0])
-                                name_list.append(st.session_state.VARG2[1][3])
+                                config_list.append(st.session_state.VARG2[0][0])
+                                name_list.append(st.session_state.VARG2[0][3])
                                 gam.payload_range_graph(config_list, name_list)   # Plot payload-range diagram
                             st.session_state.VARG2.pop()
                     except:
                         st.info("No configurations to display.")
 
+                    
                     st.write("")
                     st.write("Save Airplane Configuration")
                     left_column3, right_column3 = st.columns(2)
@@ -660,7 +677,7 @@ def setup3():
                     with left_column3:
                         name = st.text_input("Specify Airplane Name")
 
-                        duplicate_name = any(ele[3] == name and ele[3] != "" for ele in st.session_state.VARG1)
+                        duplicate_name = any(ele[3] == name and ele[3] != "" for ele in st.session_state.VARG2)
                         if duplicate_name:
                             st.warning("Please specify a new name for the airplane.")
                         else:
@@ -673,7 +690,8 @@ def setup3():
                                     tup = (this_dict, two_dict, table, f"AC {len(st.session_state.VARG2)}")
                                     st.session_state.VARG2.append(tup)
                                     st.success(f"AC {len(st.session_state.VARG2)} saved!")
-                
+                                    
+
     except:
         st.warning("An airplane must be selected to continue.")
 
