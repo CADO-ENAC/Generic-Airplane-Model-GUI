@@ -52,6 +52,7 @@ By lowering technical and licensing barriers, GAM facilitates reproducible desig
 - **Programming language**: Python
 - **Operating system**: Platform independent
 - **User interface**: Web-based (Streamlit)
+- **Archive**: https://doi.org/10.5281/zenodo.18613416
 
 
 ## References
