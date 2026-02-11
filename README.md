@@ -80,8 +80,8 @@ Next, benchmark against a conventional aircraft:
 2. Select `By Airplane Manufacturer and ICAO Code`
 3. Choose:
    - Airplane Manufacturer: **Airbus**
-   - ICAO code:A319
-   - Airplane Name:A319-100
+   - ICAO code: **A319**
+   - Airplane Name: **A319-100**
 4. Save the aircraft configuration by specifying airplane name and clicking the `Save Airplane` button.
 2. Open the **Payload-Range Comparison** module to visualize differences.
 
