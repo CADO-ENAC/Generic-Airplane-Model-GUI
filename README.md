@@ -54,43 +54,62 @@ The following example illustrates a typical use case in conceptual aircraft desi
 
 ### Scenario I: Comparing Conventional and Hydrogen Aircraft
 1. Open the **Conceptual Aircraft Design** module.
-2. Define a reference mission (e.g., 150 passengers, 3000 km range).
-3. Select:
-   - Energy source: **Kerosene**
+2. Define the power system:
+   - Energy Type: **Liquid H2**
+   - Number of Engines: **2**
    - Propulsion: **Turbofan**
-4. Record the resulting:
+   - Engine Bypass Ratio: **5.9**
+3. Define the design mission:
+   - Airplane Category: **Short/Medium Range**
+   - Airplane Design Range (km): **6000**
+   - Number of Passengers: **156**
+   - Cruise Mach Number: **0.78**
+   - Cruise Altitude (ft): **35000**
+4. Review the results:
+   - Propulsion system characteristics
+   - Design definition summary
+   - Mass breakdown
+   - Design mission performance results
+   - Performance factors & efficiencies
    - Payload–range diagram
-   - Operating cost
-   - Fuel consumption
+5. Save the aircraft configuration by specifying airplane name and clicking the `Save Airplane` button.
+ 
+Next, benchmark against a conventional aircraft:
+1. Open the **Tune Existing Airplane** module.
+2. Select `By Airplane Manufacturer and ICAO Code`
+3. Choose:
+   - Airplane Manufacturer: **Airbus**
+   - ICAO code:A319
+   - Airplane Name:A319-100
+4. Save the aircraft configuration by specifying airplane name and clicking the `Save Airplane` button.
+2. Open the **Payload-Range Comparison** module to visualize differences.
 
-Then:
-
-5. Modify the configuration by selecting:
-   - Energy source: **Liquid Hydrogen**
-   - Propulsion: **Turbofan**
-
-6. Compare:
-   - Payload–range capability
-   - Aircraft mass breakdown
-   - Flight cash operating cost
-
-This comparison enables users to directly observe the impact of alternative energy carriers on aircraft performance and economics under identical mission assumptions.
+This workflow allows users to directly compare a hydrogen-powered aircraft concept with a conventional kerosene aircraft under comparable mission assumptions, highlighting differences in mass distribution, payload–range capability, and overall performance characteristics.
 
 ### Scenario II: Sensitivity Study
-Users can also modify:
-- Structural technology factors
-- Engine efficiency
-- Specific energy of storage media
+1. Open the **Flight COC Analysis** module.
+2. Select the **Long Range** category.
 
-and immediately observe changes in:
-- Maximum takeoff weight
-- Required thrust
-- Operating cost trends
+Users can vary technology and cost assumptions such as:
+- Battery Energy Desity
+- Fuel Cell Power Density
+- LH2 Tank Gravimetric Index
+- eMotor Price
+- Fuel Cell Price
+- LH2 Tank Price
+- Battery Capacity Price
+- LH2 Energy Price
+- LCH4 Energy Price
+- eFuel Energy Price
 
-This makes GAM suitable for:
-- Classroom demonstrations
-- Student design projects
-- Preliminary technology trade studies
+The platform immediately updates performance and cost metrics, allowing users to identify the propulsion system and energy carrier combination that minimizes operating cost for a given seat capacity and mission range.
+ 
+These scenarios demonstrate how GAM supports:
+
+- Classroom demonstrations of aircraft design trade-offs  
+- Student-led conceptual design projects  
+- Preliminary evaluation of emerging propulsion technologies  
+- Comparative assessment of decarbonization pathways  
 
 ***
 ## Funding
