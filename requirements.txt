@@ -1,4 +1,3 @@
-copy
 pandas
 scipy
 matplotlib
