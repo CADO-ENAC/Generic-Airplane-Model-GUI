@@ -5,7 +5,6 @@ This repository contains a web application for the Generic Airplane Model (GAM) 
 The tool was developed by ENAC and ISAE-SUPAERO in Toulouse, France.
 
 
-***
 ## Dependencies
 This project relies on the following Python packages:
 - Numpy
@@ -26,9 +25,9 @@ You can use GAM either through the online web application or by running it local
 ### 🌐 Option 1 – Use the live web application
 The simplest way to use GAM is through the web interface:
 👉 https://generic-airplane-model.streamlit.app/
+
 No installation is required.
 
----
 
 ### 💻 Option 2 – Run locally
 
@@ -49,11 +48,11 @@ pip install -r requirements.txt
 streamlit run Conceptual_Airplane_Design.py
 ```
 
-***
+
 ## Example Scenario
 The following example illustrates a typical use case in conceptual aircraft design:
 
-### Comparing Conventional and Hydrogen Aircraft
+### Scenario I: Comparing Conventional and Hydrogen Aircraft
 1. Open the **Conceptual Aircraft Design** module.
 2. Define a reference mission (e.g., 150 passengers, 3000 km range).
 3. Select:
@@ -77,9 +76,7 @@ Then:
 
 This comparison enables users to directly observe the impact of alternative energy carriers on aircraft performance and economics under identical mission assumptions.
 
----
-
-### Sensitivity Study
+### Scenario II: Sensitivity Study
 Users can also modify:
 - Structural technology factors
 - Engine efficiency
@@ -95,10 +92,11 @@ This makes GAM suitable for:
 - Student design projects
 - Preliminary technology trade studies
 
-
+***
 ## Funding
 
 This research was funded by the Fédération ENAC ISAE-SUPAERO ONERA, Université de Toulouse, France.
+
 
 ## License
 
