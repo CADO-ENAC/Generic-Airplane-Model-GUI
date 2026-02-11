@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/927149892.svg)](https://doi.org/10.5281/zenodo.18613415)
 # Web Application of Generic Airplane Model (GAM) V2.0
 
 This repository contains a web application for the Generic Airplane Model (GAM) available at <https://generic-airplane-model.streamlit.app/>. GAM is a Python toolbox for **preliminary airplane design based on statistical regressions** published at <https://gitlab.com/m6029/genericairplanemodel.git>. GAM and its web application cover various airplane propulsion systems, including conventional thermal engines, electric engines, and fuel cells, as well as various energy sources such as kerosene, hydrogen, batteries, methane, and ammonia.
