@@ -1,4 +1,3 @@
-numpy
 copy
 pandas
 scipy
