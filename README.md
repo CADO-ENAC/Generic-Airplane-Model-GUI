@@ -4,6 +4,7 @@ This repository contains a web application for the Generic Airplane Model (GAM) 
 
 The tool was developed by ENAC and ISAE-SUPAERO in Toulouse, France.
 
+
 ***
 ## Dependencies
 This project relies on the following Python packages:
@@ -16,6 +17,84 @@ This project relies on the following Python packages:
 - Plotly
 - Streamlit
 - Tabulate
+
+
+***
+## Quickstart
+You can use GAM either through the online web application or by running it locally.
+
+### 🌐 Option 1 – Use the live web application
+The simplest way to use GAM is through the web interface:
+👉 https://generic-airplane-model.streamlit.app/
+No installation is required.
+
+---
+
+### 💻 Option 2 – Run locally
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/CADO-ENAC/Generic-Airplane-Model-GUI.git
+cd Generic-Airplane-Model-GUI
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Launch the application:
+```bash
+streamlit run Conceptual_Airplane_Design.py
+```
+
+***
+## Example Scenario
+The following example illustrates a typical use case in conceptual aircraft design:
+
+### Comparing Conventional and Hydrogen Aircraft
+1. Open the **Conceptual Aircraft Design** module.
+2. Define a reference mission (e.g., 150 passengers, 3000 km range).
+3. Select:
+   - Energy source: **Kerosene**
+   - Propulsion: **Turbofan**
+4. Record the resulting:
+   - Payload–range diagram
+   - Operating cost
+   - Fuel consumption
+
+Then:
+
+5. Modify the configuration by selecting:
+   - Energy source: **Liquid Hydrogen**
+   - Propulsion: **Turbofan**
+
+6. Compare:
+   - Payload–range capability
+   - Aircraft mass breakdown
+   - Flight cash operating cost
+
+This comparison enables users to directly observe the impact of alternative energy carriers on aircraft performance and economics under identical mission assumptions.
+
+---
+
+### Sensitivity Study
+Users can also modify:
+- Structural technology factors
+- Engine efficiency
+- Specific energy of storage media
+
+and immediately observe changes in:
+- Maximum takeoff weight
+- Required thrust
+- Operating cost trends
+
+This makes GAM suitable for:
+- Classroom demonstrations
+- Student design projects
+- Preliminary technology trade studies
+
 
 ## Funding
 

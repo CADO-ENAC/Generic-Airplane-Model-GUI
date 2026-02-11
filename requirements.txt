@@ -1,3 +1,6 @@
+numpy
+copy
+pandas
 scipy
 matplotlib
 plotly
