@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 def init_commuter(max_fuel_factor, stdm_factor, lod_factor,
                   battery_density, fuel_cell_power_density, lh2_tank_index,
                   emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                  battery_price, lh2_price, lch4_price, e_fuel_price):
+                  battery_price, lh2_price, lch4_price, e_fuel_price, criterion):
     gam = GAM()
 
     # Explore commuter category
@@ -41,7 +41,6 @@ def init_commuter(max_fuel_factor, stdm_factor, lod_factor,
     npax_window = [2, 19]
     dist_window = [250, 1500]
 
-    criterion = "flight_cash_operating_cost"
 
     gam.max_fuel_factor = max_fuel_factor    # Design on max fuel mission
     gam.stdm_factor = stdm_factor            # Assuming 10% weight improvement for all aircraft
@@ -107,4 +106,4 @@ def init_commuter(max_fuel_factor, stdm_factor, lod_factor,
                             "engine_type": "turboprop",
                             "thruster_type": "propeller",
                             "bpr": None}
-    return gam, design_mission, power_system, dist_window, npax_window, criterion
+    return gam, design_mission, power_system, dist_window, npax_window

@@ -507,7 +507,7 @@ class GAM(object):
         print("")
         print("           gam.delta_payload = ", "%.3f" % self.delta_payload, " Reference payload tuning")
         print("")
-        print("                    gam.disa = ", "%.1f" % self.disa, " K, Temperature shift for all computations")
+        print("                    gam.disa = ", "%.1f" % self.disa, " K, Temperature shift for all computat  ions")
         print("           gam.take_off_time = ", "%.0f" % self.take_off_time, " s, 30s take off + initial climb")
         print("         gam.full_power_time = ", "%.0f" % self.full_power_time, " s, 15s take off + initial climb, for hybrid only")
 

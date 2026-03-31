@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 def init_short(max_fuel_factor, stdm_factor, lod_factor,
                   battery_density, fuel_cell_power_density, lh2_tank_index,
                   emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                  battery_price, lh2_price, lch4_price, e_fuel_price):
+                  battery_price, lh2_price, lch4_price, e_fuel_price, criterion):
     gam = GAM()
 
     # Explore short_medium category
@@ -43,7 +43,7 @@ def init_short(max_fuel_factor, stdm_factor, lod_factor,
     npax_window = [80, 250]
     dist_window = [4500, 8000]
 
-    criterion = "flight_cash_operating_cost"
+    # criterion = "flight_cash_operating_cost"
 
     gam.max_fuel_factor = max_fuel_factor    # Design on max fuel mission
     gam.stdm_factor = stdm_factor            # Assuming 10% weight improvement for all aircraft
@@ -110,5 +110,5 @@ def init_short(max_fuel_factor, stdm_factor, lod_factor,
                             "thruster_type": "fan",
                             "bpr": bpr}
 
-    return gam, design_mission, power_system, dist_window, npax_window, criterion
+    return gam, design_mission, power_system, dist_window, npax_window
 

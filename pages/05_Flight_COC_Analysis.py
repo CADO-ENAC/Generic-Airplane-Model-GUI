@@ -20,12 +20,12 @@ def pritting_fuel():
     stdm_factor = 1.0
     lod_factor = 1.0
 
-    def plot_domain(ax, init_function, title):
-        gam, design_mission, power_system, dist_window, npax_window, criterion = init_function(
+    def plot_domain(ax, init_function, title, criterion):
+        gam, design_mission, power_system, dist_window, npax_window = init_function(
             max_fuel_factor, stdm_factor, lod_factor,
             battery_density, fuel_cell_power_density, lh2_tank_index,
             emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-            battery_price, lh2_price, lch4_price, e_fuel_price
+            battery_price, lh2_price, lch4_price, e_fuel_price, criterion
         )
         color_ind, npax_list, dist_list = find_index(
             gam, design_mission, power_system, dist_window, npax_window, criterion
@@ -50,8 +50,8 @@ def pritting_fuel():
 
     st.sidebar.write("### Select the Aircraft Category to Display:")
     airplane_type = st.sidebar.radio("", ["Commuter", "Regional", "Short/Medium Range", "Long Range", "All Categories Combined"])
-
-
+    
+    criterion = "flight_cash_operating_cost"
     if airplane_type == "Commuter":
         st.header("Aircraft Category: Commuter")
         left1, right1 = st.columns(2)
@@ -144,11 +144,11 @@ def pritting_fuel():
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
 
-            gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
+            gam, design_mission, power_system, dist_window, npax_window = init_commuter(
                 max_fuel_factor, stdm_factor, lod_factor,
                     battery_density, fuel_cell_power_density, lh2_tank_index,
                     emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                    battery_price, lh2_price, lch4_price, e_fuel_price
+                    battery_price, lh2_price, lch4_price, e_fuel_price, criterion
             )
             labels = [
                 power_system[key]["engine_type"] + " " + power_system[key]["energy_type"]
@@ -157,7 +157,7 @@ def pritting_fuel():
             labels[1] += "+fc"
 
             # plot_domain(ax, init_commuter, "Commuter")
-            plot_domain(ax, init_commuter, " ")
+            plot_domain(ax, init_commuter, " ", criterion)
 
             # Colors
             pcolors = cmapa(np.linspace(0.0, 1.0, len(labels)))
@@ -271,11 +271,11 @@ def pritting_fuel():
             colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
-            gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
+            gam, design_mission, power_system, dist_window, npax_window = init_commuter(
                 max_fuel_factor, stdm_factor, lod_factor,
                     battery_density, fuel_cell_power_density, lh2_tank_index,
                     emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                    battery_price, lh2_price, lch4_price, e_fuel_price
+                    battery_price, lh2_price, lch4_price, e_fuel_price, criterion
             )
             labels = [
                 power_system[key]["engine_type"] + " " + power_system[key]["energy_type"]
@@ -284,7 +284,7 @@ def pritting_fuel():
             labels[1] += "+fc"
 
             # plot_domain(ax, init_regional, "Regional")
-            plot_domain(ax, init_regional, " ")
+            plot_domain(ax, init_regional, " ", criterion)
 
             # Colors
             pcolors = cmapa(np.linspace(0.0, 1.0, len(labels)))
@@ -392,11 +392,11 @@ def pritting_fuel():
             colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
-            gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
+            gam, design_mission, power_system, dist_window, npax_window = init_commuter(
                 max_fuel_factor, stdm_factor, lod_factor,
                     battery_density, fuel_cell_power_density, lh2_tank_index,
                     emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                    battery_price, lh2_price, lch4_price, e_fuel_price
+                    battery_price, lh2_price, lch4_price, e_fuel_price, criterion
             )
             labels = [
                 power_system[key]["engine_type"] + " " + power_system[key]["energy_type"]
@@ -405,7 +405,7 @@ def pritting_fuel():
             labels[1] += "+fc"
 
             # plot_domain(ax, init_short, "Short-medium")
-            plot_domain(ax, init_short, " ")
+            plot_domain(ax, init_short, " ", criterion)
 
             # Colors
             pcolors = cmapa(np.linspace(0.0, 1.0, len(labels)))
@@ -512,11 +512,11 @@ def pritting_fuel():
             colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
-            gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
+            gam, design_mission, power_system, dist_window, npax_window = init_commuter(
                 max_fuel_factor, stdm_factor, lod_factor,
                     battery_density, fuel_cell_power_density, lh2_tank_index,
                     emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                    battery_price, lh2_price, lch4_price, e_fuel_price
+                    battery_price, lh2_price, lch4_price, e_fuel_price, criterion
             )
             labels = [
                 power_system[key]["engine_type"] + " " + power_system[key]["energy_type"]
@@ -525,7 +525,7 @@ def pritting_fuel():
             labels[1] += "+fc"
 
             # plot_domain(ax, init_long, "Long range")
-            plot_domain(ax, init_long, " ")
+            plot_domain(ax, init_long, " ", criterion)
 
             # Colors
             pcolors = cmapa(np.linspace(0.0, 1.0, len(labels)))
@@ -633,11 +633,11 @@ def pritting_fuel():
             colors = ["#306063", "#b3bc6d", "#64ab74", "#0c1c54", "#48517a"]
             cmapa = LinearSegmentedColormap.from_list("mycmap", colors)
 
-            gam, design_mission, power_system, dist_window, npax_window, criterionCum = init_commuter(
+            gam, design_mission, power_system, dist_window, npax_window = init_commuter(
                 max_fuel_factor, stdm_factor, lod_factor,
                     battery_density, fuel_cell_power_density, lh2_tank_index,
                     emotor_price, fuel_cell_price, lh2_tank_price, battery_capacity_price,
-                    battery_price, lh2_price, lch4_price, e_fuel_price
+                    battery_price, lh2_price, lch4_price, e_fuel_price, criterion
             )
             labels = [
                 power_system[key]["engine_type"] + " " + power_system[key]["energy_type"]
@@ -650,7 +650,7 @@ def pritting_fuel():
             criteria = []
 
             for i, (init_func, title) in enumerate(zip(init_functions, titles)):
-                criteria.append(plot_domain(ax[i // 2, i % 2], init_func, title))
+                criteria.append(plot_domain(ax[i // 2, i % 2], init_func, title, criterion))
 
             # Colors
             pcolors = cmapa(np.linspace(0.0, 1.0, len(labels)))

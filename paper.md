@@ -1,5 +1,6 @@
 ---
-title: "An Interactive Web-Based Tool for Conceptual Aircraft Design and Analysis"
+title: "Technology tradespace exploration in Aircraft Conceptual Design and Analysis"
+
 tags:
   - aerospace engineering
   - aircraft design
@@ -19,40 +20,56 @@ authors:
 affiliations:
   - name: F\'ed\'eration ENAC ISAE-SUPAERO ONERA, Universit\'e de Toulouse, 31000, Toulouse, France.
     index: 1
-date: 2026-02-11
+date: 2026-02-12
 bibliography: references.bib
 ---
 
 
 ## Summary
+GAM (Generic Airplane Model) is an open-source computational framework for conceptual aircraft design and technology trade-space exploration. The software integrates empirical preliminary design methods with propulsion–energy system modeling and operating cost evaluation to support systematic comparison of alternative aircraft configurations.
 
-GAM (Generic Airplane Model) is an open-source, web-based software platform for conceptual aircraft design and analysis, developed to support education and early-stage design exploration. It provides an interactive environment in which users can investigate how key design decisions—such as energy sources, propulsion system configurations, and mission requirements—affect aircraft performance and operating cost.
+The framework enables users to define aircraft propulsion architectures, energy carriers, and mission requirements, and then evaluate resulting performance metrics, mass breakdown, payload–range capability, and flight cash operating cost. In addition to conventional kerosene-powered turbofan configurations, GAM supports alternative energy carriers including liquid hydrogen, liquid methane, ammonia, batteries, and hybrid-electric architectures.
 
-The platform is organized into six integrated modules covering conceptual aircraft design, tuning and modification of existing or user-defined configurations, database trend visualization and comparison, payload–range comparison, and flight cash operating cost analysis. These modules enable users to design new aircraft concepts, benchmark them against approximately 300 reference aircraft, and perform systematic performance and cost comparisons under varying technological assumptions.
+A central contribution of this implementation is the integration of propulsion–energy system selection and technology sensitivity analysis within a unified computational workflow. Users can vary technological assumptions—such as specific energy, tank gravimetric index, component power density, and cost parameters—and systematically evaluate their influence on aircraft sizing and operating economics. The framework includes benchmarking capabilities against a curated database of approximately 300 existing aircraft.
 
-Through immediate visual and numerical feedback, GAM supports parametric study and technology impact assessment within a browser-based environment that requires no local installation. This accessibility makes the tool suitable for aerospace engineering education, demonstration activities, and preliminary research studies.
+Although GAM can be accessed through a web-based interface, this repository contains the complete computational implementation, including propulsion–energy integration, cost modeling, and trade-off analysis modules.
+
+
 
 
 ## Statement of Need
+Aircraft conceptual design relies heavily on empirical methods and iterative trade studies to evaluate the impact of design choices on performance and cost [@raymer2024; @torenbeek2013advanced]. However, existing industrial tools are often proprietary, computationally intensive, and not well suited for rapid exploration of alternative propulsion systems and emerging energy carriers [@David2021; @lukaczyk2015suave; @drela2010tasopt].
 
-Aircraft conceptual design education faces inherent challenges due to limited access to large-scale experimental facilities and real-world aerospace systems[@raymer2024;@torenbeek2013advanced]. Although industrial design tools provide advanced capabilities, they are typically proprietary, computationally intensive, and not well suited for teaching fundamental design trade-offs at an early stage[@David2021;@lukaczyk2015suave;@wells2017flight;@drela2010tasopt]. Consequently, students and early-career researchers often struggle to develop intuition about how design decisions influence aircraft performance, operational characteristics, and cost drivers.
+In parallel, aviation decarbonization efforts require systematic evaluation of hydrogen, electric, and hybrid-electric propulsion concepts under consistent mission assumptions [@lee2023climate]. While numerous studies examine specific propulsion technologies, fewer open-source computational frameworks integrate aircraft sizing, propulsion–energy coupling, and operating cost evaluation within a unified and reproducible environment.
 
-GAM addresses this need by offering an open-source, web-based platform for rapid conceptual aircraft design exploration. Built upon empirical methods commonly used in preliminary design [@kambiri2025energy;@kambiri2024energy], the tool reduces the number of primary decision variables that users must explicitly define while transparently exposing the dependent parameters influenced by those choices. Dynamic adjustment of parameter ranges and default values guides users toward physically consistent configurations, lowering cognitive complexity and reducing the risk of unrealistic designs.
+GAM addresses this gap by providing:
 
-The relevance of such a platform is amplified in the context of aviation decarbonization [@lee2023climate]. As the industry evaluates alternative propulsion systems and energy carriers, accessible tools for comparing technology pathways are increasingly important. Unlike conventional design tools that primarily focus on kerosene-based aircraft, GAM supports conceptual analysis across multiple energy sources—including liquid hydrogen, liquid methane, and liquid ammonia—and propulsion architectures such as turbofan, turboprop, piston engines, and electric motors. The inclusion of performance data from approximately 300 existing aircraft enables direct benchmarking between emerging concepts and operational fleets.
+- Aircraft sizing based on empirical preliminary design relations
+- Coupled propulsion–energy system modeling across multiple architectures
+- Sensitivity analysis for energy efficiency related parameters that varies with the technological advancement
+- Operating cost estimation enabling identification of propulsion–energy combinations that minimize cost under specified mission constraints
+- Benchmarking against existing operational aircraft
 
-By lowering technical and licensing barriers, GAM facilitates reproducible design studies and transparent comparison of alternative aircraft configurations across educational and research environments.
+Unlike visualization-only web tools or simple front-end wrappers, this repository implements the full computational workflow required for propulsion–energy trade-space exploration in conceptual aircraft design. The software is intended for aerospace engineering education, early-stage research studies, and preliminary evaluation of emerging propulsion technologies.
+
+By lowering barriers to reproducible trade studies and enabling transparent comparison of alternative configurations, GAM supports systematic exploration of decarbonization pathways in civil aviation.
+
+
 
 
 ## Availability
 
 - **Repository**: https://github.com/CADO-ENAC/Generic-Airplane-Model-GUI
 - **Live demonstration**: https://generic-airplane-model.streamlit.app/
+- **Archive**: https://doi.org/10.5281/zenodo.18613416
 - **License**: GNU Lesser General Public License (LGPL-3.0)
 - **Programming language**: Python
 - **Operating system**: Platform independent
-- **User interface**: Web-based (Streamlit)
-- **Archive**: https://doi.org/10.5281/zenodo.18613416
+
+
+## AI Usage Disclosure
+
+Large language models were used solely for language editing and stylistic refinement of portions of the manuscript. All technical content, software design, methodology, and scientific conclusions were developed by the authors. The authors take full responsibility for the accuracy and integrity of the work.
 
 
 ## References
