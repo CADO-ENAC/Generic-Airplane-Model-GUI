@@ -15,13 +15,12 @@ from doc_vs_techno_long_range_modify import init_long
 from doc_vs_techno_short_medium_modify import init_short
 
 
-def pritting_fuel():
+def pritting_fuel(operating_cost):
     max_fuel_factor = 1.25
     stdm_factor = 1.0
     lod_factor = 1.0
 
     def plot_domain(ax, init_function, title, criterion):
-        
         gam, design_mission, power_system, dist_window, npax_window = init_function(
             max_fuel_factor, stdm_factor, lod_factor,
             battery_density, fuel_cell_power_density, lh2_tank_index,
@@ -51,8 +50,11 @@ def pritting_fuel():
 
     st.sidebar.write("### Select the Aircraft Category to Display:")
     airplane_type = st.sidebar.radio("", ["Commuter", "Regional", "Short/Medium Range", "Long Range", "All Categories Combined"])
-    criterion = "flight_direct_operating_cost"
-
+    
+    if operating_cost == "COC":
+        criterion = "flight_cash_operating_cost"
+    elif operating_cost == "DOC":
+        criterion = "flight_direct_operating_cost"
     if airplane_type == "Commuter":
         st.header("Aircraft Category: Commuter")
         left1, right1 = st.columns(2)
@@ -682,10 +684,12 @@ def main_graph():
         layout="wide",
     )
     # App title
-    st.title("Flight Direct Operating Cost Analysis Tool")
+    st.title("Flight Operating Cost Analysis Tool")
+    # st.title("Flight Cash Operating Cost Analysis Tool")
     st.markdown("<h3><em>Developed by the CADO Team at ENAC</em></h3>", unsafe_allow_html=True)
-    st.markdown("<h5 style='font-family: Courier New; color: green;'>An interactive tool for analyzing and visualizing flight direct operating cost at the conceptual design level.</h5>", unsafe_allow_html=True)
-    pritting_fuel()
+    st.markdown("<h5 style='font-family: Courier New; color: green;'>An interactive tool for analyzing and visualizing flight Cash Operating Cost (COC) and Direct Operating Cost (DOC) at the conceptual design level.</h5>", unsafe_allow_html=True)
+    operating_cost = st.segmented_control('cost', label_visibility='collapsed', options=['DOC', 'COC'], default='COC')
+    pritting_fuel(operating_cost)
 
 
 # Run the application
