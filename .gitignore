@@ -1,3 +1,41 @@
-/__pycache__/
-/gam_utils/__pycache__/
-**/__pycache__/
+# Python cache / bytecode
+__pycache__/
+*.py[cod]
+
+# Core model: keep the source private, publish only the compiled modules (see tools/build_gam_copy.py)
+gam_copy.py
+
+# Compiled extensions and build artifacts
+*.pyd
+*.so
+!/gam_copy.*.pyd
+!/gam_copy.*.so
+*.c
+build/
+dist/
+*.egg-info/
+GAM_student*/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor / IDE settings (keep the shared debug configuration)
+.vscode/*
+!.vscode/launch.json
+.idea/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Office lock files (created while an .xlsx is open in Excel)
+~$*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
